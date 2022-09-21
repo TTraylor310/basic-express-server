@@ -2,28 +2,39 @@ const express = require('express');
 
 const notFound = require('./error-handlers/404');
 const errorHandler = require('./error-handlers/500');
-// const validator = require('./middleware/validator');
-// const logger = require('./middleware/logger');
+const validator = require('./middleware/validator');
+const logger = require('./middleware/logger');
 
 const PORT = process.env.PORT || 3002;
 
 const app = express();
 
 // app.use(validator);
-// app.use(logger);
-
+app.use(logger);
 
 app.get('/', (req, res, next) => {
   res.status(200).send('Welcome to Tray home, Day 2');
 });
 
+app.get('/bad', (req, res, next) => {
+  next('this is a bad route');
+});
 
-//Expects a query string from the user with a “name” property
-// When present, output JSON to the client with this shape: { name: "name provided" }
-// Without a name in the query string, force a “500” error
 
-app.get('/person', (req, res, next) => {
-  next('this is person');
+app.get('/person', validator, (req, res, next) => {
+  let {named} = req.query;
+
+  try{
+    if(named){
+      res.status(200).send(`{'name': ${named}}`);
+    } else {
+      res.status(200).send('Checkers 200');
+    } 
+  } catch (err) {
+    next(err.message);
+  }
+  
+  // next('this is a person');
 });
 
 

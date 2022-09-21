@@ -9,4 +9,5 @@ module.exports = (error, req, res, next) => {
     body: req.body,
     message: typeof(error) === 'string' ? error : `ServerError: ${error.message}`,
   });
+  next();
 };
