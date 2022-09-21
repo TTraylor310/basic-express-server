@@ -2,6 +2,7 @@
 
 ## Author: Tim Traylor
 
+* [Heroku Link](https://ttray310-basic-server-express.herokuapp.com/)
 * [tests report](https://github.com/TTraylor310/basic-express-server/actions)
 
 ### Setup
@@ -17,7 +18,7 @@ Running the app
 
         ```javascript
         {
-          "domain": "ttraylor310-xxxxxxxxx.herokuapp.com/",
+          "domain": "https://ttray310-basic-server-express.herokuapp.com/",
           "status": "running",
           "port": 
         }
