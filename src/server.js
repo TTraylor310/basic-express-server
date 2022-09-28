@@ -1,3 +1,6 @@
+'use strict';
+
+require('dotenv').config();
 const express = require('express');
 
 const notFound = require('./error-handlers/404');
@@ -22,20 +25,24 @@ app.get('/bad', (req, res, next) => {
 
 
 app.get('/person', validator, (req, res, next) => {
-  let {named} = req.query;
-
-  try{
-    if(named){
-      res.status(200).send(`{'name': ${named}}`);
-    } else {
-      res.status(200).send('Checkers 200');
-    } 
-  } catch (err) {
-    next(err.message);
-  }
-  
-  // next('this is a person');
+  res.status(200).json(req.query);
 });
+
+
+// app.get('/person/:named', validator, (req, res, next) => {
+//   let {named} = req.params;
+
+//   try{
+//     if(named){
+//       res.json({name: `${named}`});
+//       // res.status(200).send(`{'name': ${named}}`);
+//     } else {
+//       res.status(200).send('Checkers again? 200');
+//     } 
+//   } catch (err) {
+//     next(err.message);
+//   }
+// });
 
 
 
