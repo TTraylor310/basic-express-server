@@ -1,8 +1,10 @@
 'use strict';
 
-const validator = (req, res, next) => {
-  console.log(`Request: ${req}`);
-  next();
-};
+module.exports = (req, res, next) => {
 
-module.exports = validator;
+  if (req.query.name) {
+    next();
+  } else {
+    next ('Name required when looking for a person.');
+  }
+};
